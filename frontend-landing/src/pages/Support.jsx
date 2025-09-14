@@ -1,11 +1,11 @@
 // src/pages/Support.jsx
 import React, { useState } from "react";
 import { Box } from "@mui/material";
-import SupportNavbar from "../components/SupportNavbar";
-import SupportHero from "../components/SupportHero";
-import CategoriesSection from "../components/CategoriesSection";
-import FAQSection from "../components/FAQSection";
-import SupportFooter from "../components/SupportFooter";
+import SupportNavbar from "../components/SupportComponent/SupportNavbar";
+import SupportHero from "../components/SupportComponent/SupportHero";
+import CategoriesSection from "../components/SupportComponent/CategoriesSection";
+import FAQSection from "../components/SupportComponent/FAQSection";
+import SupportFooter from "../components/SupportComponent/SupportFooter";
 import {
   AccountCircle,
   AccountBalanceWallet,

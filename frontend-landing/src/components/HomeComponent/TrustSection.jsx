@@ -1,6 +1,6 @@
 import { Box, Container, Typography, Link } from "@mui/material";
-import EcosystemImg from "../assets/ecosystem.png";
-import PressLogos from "../assets/pressLogos.png";
+import EcosystemImg from "../../assets/ecosystem.png";
+import PressLogos from "../../assets/pressLogos.png";
 
 export default function TrustSection() {
   return (

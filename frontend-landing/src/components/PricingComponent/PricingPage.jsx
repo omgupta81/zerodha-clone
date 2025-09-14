@@ -1,8 +1,8 @@
 // src/pages/PricingPage.jsx
 import { Box, Container, Typography, Button } from "@mui/material"; 
-import Pricing0 from "../assets/pricing0.svg";
-import PricingEquity from "../assets/pricing0.svg";
-import PricingMF from "../assets/otherTrades.svg";
+import Pricing0 from "../../assets/pricing0.svg";
+import PricingEquity from "../../assets/pricing0.svg";
+import PricingMF from "../../assets/otherTrades.svg";
 
 export default function PricingPage() {
   const pricingItems = [

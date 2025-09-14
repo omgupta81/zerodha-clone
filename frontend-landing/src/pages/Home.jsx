@@ -1,7 +1,7 @@
-import HeroSection from "../components/HeroSection";
-import TrustSection from "../components/TrustSection";
-import PricingSection from "../components/PricingSection";
-import VarsitySection from "../components/VarsitySection";
+import HeroSection from "../components/HomeComponent/HeroSection";
+import TrustSection from "../components/HomeComponent/TrustSection";
+import PricingSection from "../components/HomeComponent/PricingSection";
+import VarsitySection from "../components/HomeComponent/VarsitySection";
 
 const Home = () => {
   return (

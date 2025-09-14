@@ -1,5 +1,5 @@
 import { Box, Container, Typography, Button } from "@mui/material";
-import VarsityImg from "../assets/education.svg";
+import VarsityImg from "../../assets/education.svg";
 
 export default function VarsitySection() {
   return (

@@ -1,5 +1,5 @@
 import { Button, Container, Typography } from "@mui/material";
-import HomeHero from "../assets/homeHero.png";
+import HomeHero from "../../assets/homeHero.png";
 export default function HeroSection() {
   return (
     <Container sx={{ textAlign: "center", py: 8 }}>

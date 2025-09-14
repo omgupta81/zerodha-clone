@@ -1,7 +1,7 @@
-import PricingPage from "../components/PricingPage";
-import ChargesExplained from "../components/ChargesExplained";
-import ChargesTables from "../components/ChargesTables";
-import BrokerageTable from "../components/BrokerageSection";
+import PricingPage from "../components/PricingComponent/PricingPage";
+import ChargesExplained from "../components/PricingComponent/ChargesExplained";
+import ChargesTables from "../components/PricingComponent/ChargesTables";
+import BrokerageTable from "../components/PricingComponent/BrokerageComponent/BrokerageSection";
 const Pricing = () => {
   return (
     <>
