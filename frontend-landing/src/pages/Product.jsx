@@ -4,7 +4,7 @@ import { Box, Container, Typography, Button } from "@mui/material";
 import Kite from "../assets/kite.png";
 import Console from "../assets/console.png";
 import Coin from "../assets/coin.png";
-import KiteConnect from "../assets/kiteConnect.png";
+import KiteConnect from "../assets/kiteconnect.png";
 import Varsity from "../assets/varsity.png";
 
 // Import Universe Component
