@@ -1,5 +1,6 @@
 // src/pages/PricingPage.jsx
-import { Box, Container, Typography, Button } from "@mui/material"; 
+import React from "react";
+import { Container, Row, Col, Card } from "react-bootstrap";
 import Pricing0 from "../../assets/pricing0.svg";
 import PricingEquity from "../../assets/pricing0.svg";
 import PricingMF from "../../assets/otherTrades.svg";
@@ -24,86 +25,58 @@ export default function PricingPage() {
   ];
 
   return (
-    <Box sx={{ py: 10, bgcolor: "#f4f6f8" }}>
-      <Container maxWidth="lg">
-        {/* Header */}
-        <Box sx={{ textAlign: "center", mb: 6 }}>
-          <Typography variant="h4" fontWeight={700} gutterBottom sx={{ color: "#1a237e" }}>
-            Charges
-          </Typography>
-          <Typography variant="body1" color="text.secondary">
-            Explore all charges and taxes for trading, investing, and mutual funds.
-          </Typography>
-        </Box>
+    <section className="py-5" style={{ backgroundColor: "#f4f6f8" }}>
+      <Container>
+        {/* Page Header */}
+        <div className="text-center mb-5">
+          <h2 className="fw-bold text-primary">Charges & Pricing</h2>
+          <p className="text-secondary">
+            Explore all charges, taxes, and brokerage rates for trading, investing, and mutual funds.
+          </p>
+        </div>
 
         {/* Pricing Cards */}
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "stretch",
-            gap: 7,
-            flexWrap: "wrap",
-          }}
-        >
+        <Row className="justify-content-center g-4">
           {pricingItems.map((item, index) => (
-            <Box
-              key={index}
-              sx={{
-                backgroundColor: "#fff",
-                borderRadius: 3,
-                boxShadow: 3,
-                p: 4,
-                width: { xs: "100%", sm: 220, md: 260 },
-                textAlign: "center",
-                transition: "0.3s",
-                cursor: "pointer",
-                "&:hover": {
-                  boxShadow: 8,
-                  transform: "translateY(-8px) scale(1.03)",
-                },
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              {/* Icon with gradient circle */}
-              <Box
-                sx={{
-                  width: 80,
-                  height: 80,
-                  borderRadius: "50%",
-                  background: "linear-gradient(135deg, #42a5f5, #1976d2)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  mb: 2,
-                  boxShadow: 2,
+            <Col key={index} xs={12} sm={6} md={4} className="d-flex justify-content-center">
+              <Card
+                className="text-center shadow-sm h-100"
+                style={{
+                  borderRadius: "1rem",
+                  transition: "transform 0.3s ease",
+                  cursor: "pointer",
+                  width: "100%",
+                  maxWidth: "260px",
                 }}
+                onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-5px)")}
+                onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
               >
-                <Box
-                  component="img"
-                  src={item.img}
-                  alt={item.label}
-                  sx={{ width: 40, height: 40 }}
-                />
-              </Box>
+                {/* Icon Circle */}
+                <div
+                  className="d-flex align-items-center justify-content-center mx-auto mt-4 mb-3"
+                  style={{
+                    width: "80px",
+                    height: "80px",
+                    borderRadius: "50%",
+                    background: "linear-gradient(135deg, #42a5f5, #1976d2)",
+                    boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+                  }}
+                >
+                  <img src={item.img} alt={item.label} style={{ width: "40px", height: "40px" }} />
+                </div>
 
-              {/* Label */}
-              <Typography variant="h6" fontWeight={700} sx={{ mb: 1, color: "#1565c0" }}>
-                {item.label}
-              </Typography>
-
-              {/* Description */}
-              <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.5 }}>
-                {item.description}
-              </Typography>
-            </Box>
+                {/* Card Body */}
+                <Card.Body>
+                  <Card.Title className="fw-bold text-primary mb-2">{item.label}</Card.Title>
+                  <Card.Text className="text-secondary" style={{ lineHeight: 1.6, fontSize: "0.95rem" }}>
+                    {item.description}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
           ))}
-        </Box>
-
-        
+        </Row>
       </Container>
-    </Box>
+    </section>
   );
 }

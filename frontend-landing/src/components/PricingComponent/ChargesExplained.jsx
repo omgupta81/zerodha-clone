@@ -1,13 +1,13 @@
 // src/components/ChargesExplained.jsx
 import React from "react";
-import { Box, Container, Typography, Divider } from "@mui/material";
+import { Container, Row, Col, Card } from "react-bootstrap";
 
 export default function ChargesExplained() {
   const leftItems = [
     {
       title: "Securities/Commodities transaction tax",
       desc: `Tax by the government when transacting on the exchanges. Charged as above on both buy and sell sides when trading equity delivery. Charged only on selling side when trading intraday or on F&O.
-      
+
 When trading at Zerodha, STT/CTT can be a lot more than the brokerage we charge. Important to keep a tab.`,
     },
     {
@@ -55,58 +55,45 @@ Intraday Brokerage: 0.05% per executed order.` },
   ];
 
   return (
-    <Box sx={{ py: 10, bgcolor: "#f4f6f8" }}>
-      <Container maxWidth="lg">
+    <section className="py-5" style={{ backgroundColor: "#f4f6f8" }}>
+      <Container>
         {/* Heading */}
-        <Typography variant="h4" fontWeight={700} sx={{ color: "#1a237e", mb: 6 }}>
-          Charges Explained
-        </Typography>
+        <h2 className="text-primary fw-bold mb-5">Charges Explained</h2>
 
         {/* Two-column layout */}
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: { xs: "column", md: "row" },
-            gap: 6,
-            justifyContent: "space-between",
-          }}
-        >
-          {/* Left Column */}
-          <Box sx={{ flex: 1 }}>
+        <Row className="g-4">
+          <Col md={6}>
             {leftItems.map((item, idx) => (
-              <Box key={idx} sx={{ mb: 4 }}>
-                <Typography variant="h6" fontWeight={600} sx={{ color: "#1565c0", mb: 1 }}>
-                  {item.title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6, whiteSpace: "pre-line" }}>
+              <div key={idx} className="mb-4">
+                <h5 className="text-primary fw-semibold">{item.title}</h5>
+                <p className="text-secondary" style={{ whiteSpace: "pre-line", lineHeight: 1.6 }}>
                   {item.desc}
-                </Typography>
-              </Box>
+                </p>
+              </div>
             ))}
-          </Box>
+          </Col>
 
-          {/* Right Column */}
-          <Box sx={{ flex: 1 }}>
+          <Col md={6}>
             {rightItems.map((item, idx) => (
-              <Box key={idx} sx={{ mb: 4 }}>
-                <Typography variant="h6" fontWeight={600} sx={{ color: "#1565c0", mb: 1 }}>
-                  {item.title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6, whiteSpace: "pre-line" }}>
+              <div key={idx} className="mb-4">
+                <h5 className="text-primary fw-semibold">{item.title}</h5>
+                <p className="text-secondary" style={{ whiteSpace: "pre-line", lineHeight: 1.6 }}>
                   {item.desc}
-                </Typography>
-              </Box>
+                </p>
+              </div>
             ))}
-          </Box>
-        </Box>
+          </Col>
+        </Row>
 
-        {/* Full-width Disclaimer */}
-        <Box sx={{ mt: 8, p: 4, bgcolor: "#e3f2fd", borderRadius: 2 }}>
-          <Typography variant="subtitle2" color="text.secondary" sx={{ lineHeight: 1.6 }}>
-            Disclaimer: For Delivery based trades, a minimum of ₹0.01 will be charged per contract note. Clients who opt to receive physical contract notes will be charged ₹20 per contract note plus courier charges. Brokerage will not exceed the rates specified by SEBI and the exchanges. All statutory and regulatory charges will be levied at actuals. Brokerage is also charged on expired, exercised, and assigned options contracts. Free investments are available only for retail individual clients. Companies, Partnerships, Trusts, and HUFs need to pay 0.1% or ₹20 (whichever is less) as delivery brokerage. A brokerage of 0.25% of the contract value will be charged for contracts where physical delivery happens. For netted off positions in physically settled contracts, a brokerage of 0.1% will be charged.
-          </Typography>
-        </Box>
+        {/* Disclaimer */}
+        <Card className="mt-5 p-4" style={{ backgroundColor: "#e3f2fd", borderRadius: "0.5rem" }}>
+          <Card.Body>
+            <p className="text-secondary" style={{ lineHeight: 1.6 }}>
+              Disclaimer: For Delivery based trades, a minimum of ₹0.01 will be charged per contract note. Clients who opt to receive physical contract notes will be charged ₹20 per contract note plus courier charges. Brokerage will not exceed the rates specified by SEBI and the exchanges. All statutory and regulatory charges will be levied at actuals. Brokerage is also charged on expired, exercised, and assigned options contracts. Free investments are available only for retail individual clients. Companies, Partnerships, Trusts, and HUFs need to pay 0.1% or ₹20 (whichever is less) as delivery brokerage. A brokerage of 0.25% of the contract value will be charged for contracts where physical delivery happens. For netted off positions in physically settled contracts, a brokerage of 0.1% will be charged.
+            </p>
+          </Card.Body>
+        </Card>
       </Container>
-    </Box>
+    </section>
   );
 }

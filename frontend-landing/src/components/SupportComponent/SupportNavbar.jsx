@@ -1,6 +1,6 @@
 // src/components/SupportNavbar.jsx
-import React from "react";
-import { AppBar, Toolbar, Typography, Box, Button } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Navbar, Container, Nav } from "react-bootstrap";
 
 export default function SupportNavbar() {
   const links = [
@@ -8,6 +8,8 @@ export default function SupportNavbar() {
     { label: "Tickets", id: "raise-ticket-section" },
     { label: "FAQs", id: "faq-section" },
   ];
+
+  const [activeSection, setActiveSection] = useState("");
 
   // Smooth scroll handler
   const handleScroll = (id) => {
@@ -17,40 +19,91 @@ export default function SupportNavbar() {
     }
   };
 
+  // Highlight active section on scroll
+  useEffect(() => {
+    const handleScrollEvent = () => {
+      const scrollPos = window.scrollY + 100; // offset for navbar height
+      let currentSection = "";
+      links.forEach((link) => {
+        const section = document.getElementById(link.id);
+        if (section && section.offsetTop <= scrollPos) {
+          currentSection = link.id;
+        }
+      });
+      setActiveSection(currentSection);
+    };
+    window.addEventListener("scroll", handleScrollEvent);
+    return () => window.removeEventListener("scroll", handleScrollEvent);
+  }, []);
+
   return (
-    <AppBar
-      position="static"
-      sx={{
-        backgroundColor: "#fff",
-        boxShadow: 1,
-        borderBottom: "1px solid #e0e0e0",
-      }}
+    <Navbar
+      bg="white"
+      expand="lg"
+      className="border-bottom shadow-sm"
+      sticky="top"
     >
-      <Toolbar sx={{ justifyContent: "space-between" }}>
-        <Typography
-          variant="h6"
-          sx={{ fontWeight: 700, color: "#1565c0", cursor: "pointer" }}
+      <Container>
+        {/* Brand */}
+        <Navbar.Brand
+          className="fw-bold text-primary fs-4"
+          style={{ cursor: "pointer" }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
           Support
-        </Typography>
-        <Box>
-          {links.map((link) => (
-            <Button
-              key={link.label}
-              onClick={() => handleScroll(link.id)}
-              sx={{
-                mx: 1.5,
-                color: "#424242",
-                textTransform: "none",
-                fontWeight: 500,
-              }}
-            >
-              {link.label}
-            </Button>
-          ))}
-        </Box>
-      </Toolbar>
-    </AppBar>
+        </Navbar.Brand>
+
+        <Navbar.Toggle aria-controls="support-navbar-nav" />
+        <Navbar.Collapse id="support-navbar-nav">
+          <Nav className="ms-auto align-items-center">
+            {links.map((link) => (
+              <Nav.Link
+                key={link.label}
+                onClick={() => handleScroll(link.id)}
+                className={`text-dark fw-medium mx-2 ${
+                  activeSection === link.id ? "text-primary fw-bold" : ""
+                }`}
+                style={{
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                }}
+                onMouseEnter={(e) => (e.target.style.color = "#0d6efd")}
+                onMouseLeave={(e) =>
+                  (e.target.style.color =
+                    activeSection === link.id ? "#0d6efd" : "#212529")
+                }
+              >
+                {link.label}
+              </Nav.Link>
+            ))}
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+
+      {/* Optional: underline animation for active link */}
+      <style>
+        {`
+          @media (min-width: 992px) {
+            .nav-link {
+              position: relative;
+            }
+            .nav-link::after {
+              content: '';
+              position: absolute;
+              width: 0;
+              height: 2px;
+              left: 0;
+              bottom: -4px;
+              background-color: #0d6efd;
+              transition: width 0.3s;
+            }
+            .nav-link:hover::after,
+            .nav-link.text-primary::after {
+              width: 100%;
+            }
+          }
+        `}
+      </style>
+    </Navbar>
   );
 }

@@ -1,4 +1,6 @@
-import { Box, Container, Typography, Button } from "@mui/material";
+// src/pages/Product.jsx
+import React from "react";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
 
 // Product images
 import Kite from "../assets/kite.png";
@@ -7,7 +9,7 @@ import Coin from "../assets/coin.png";
 import KiteConnect from "../assets/kiteconnect.png";
 import Varsity from "../assets/varsity.png";
 
-// Import Universe Component
+// Zerodha Universe Component
 import ZerodhaUniverse from "../components/ZerodhaUniverse";
 
 export default function Product() {
@@ -19,7 +21,7 @@ export default function Product() {
         "Our ultra-fast flagship trading platform with streaming market data, advanced charts, an elegant UI, and more.",
       details:
         "Trade stocks, commodities, and currencies with real-time data and advanced charting tools.",
-      buttons: ["Try demo", "Learn more"],
+      buttons: ["Learn more"],
     },
     {
       img: Console,
@@ -44,8 +46,7 @@ export default function Product() {
       title: "Kite Connect API",
       description:
         "Build powerful trading platforms and experiences with our super simple HTTP/JSON APIs.",
-      details:
-        "Develop algorithmic trading systems or custom apps with robust APIs.",
+      details: "Develop algorithmic trading systems or custom apps with robust APIs.",
       buttons: ["Learn more"],
     },
     {
@@ -60,88 +61,53 @@ export default function Product() {
   ];
 
   return (
-    <Box sx={{ py: { xs: 8, md: 12 }, bgcolor: "#f9f9f9" }}>
-      <Container maxWidth="lg">
-        {/* Heading */}
-        <Typography
-          variant="h4"
-          fontWeight={700}
-          textAlign="center"
-          gutterBottom
-          sx={{ color: "#2c2c2c" }}
-        >
-          Zerodha Products
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          textAlign="center"
-          mb={6}
-          sx={{ color: "#555" }}
-        >
+    <section className="py-5 bg-light">
+      <Container>
+        {/* Header */}
+        <h2 className="fw-bold text-center mb-3 text-dark">Zerodha Products</h2>
+        <p className="text-center text-muted mb-5">
           Sleek, modern, and intuitive trading platforms
-        </Typography>
+        </p>
 
-        {/* Products Section */}
+        {/* Products Grid */}
         {products.map((product, idx) => (
-          <Box
+          <Row
             key={idx}
-            sx={{
-              display: "flex",
-              flexDirection: {
-                xs: "column",
-                md: idx % 2 === 0 ? "row" : "row-reverse",
-              },
-              alignItems: "center",
-              gap: 4,
-              mb: 10,
-              p: 3,
-              bgcolor: "#fff",
-              boxShadow: 3,
-              borderRadius: 2,
-            }}
+            className={`align-items-center mb-5 p-3 bg-white shadow rounded g-4 ${
+              idx % 2 !== 0 ? "flex-row-reverse" : ""
+            }`}
           >
-            <Box
-              component="img"
-              src={product.img}
-              alt={product.title}
-              sx={{
-                width: { xs: "80%", md: 320 },
-                height: "auto",
-                objectFit: "contain",
-                borderRadius: 2,
-              }}
-            />
-            <Box sx={{ flex: 1 }}>
-              <Typography
-                variant="h5"
-                fontWeight={600}
-                gutterBottom
-                sx={{ color: "#2c2c2c" }}
-              >
-                {product.title}
-              </Typography>
-              <Typography variant="body1" sx={{ color: "#444", mb: 1 }}>
-                {product.description}
-              </Typography>
-              <Typography variant="body2" sx={{ color: "#666", mb: 2 }}>
-                {product.details}
-              </Typography>
+            {/* Product Image */}
+            <Col xs={12} md={5} className="text-center">
+              <Card.Img
+                src={product.img}
+                alt={product.title}
+                className="img-fluid rounded"
+                style={{ maxWidth: "320px" }}
+              />
+            </Col>
+
+            {/* Product Details */}
+            <Col xs={12} md={7}>
+              <h4 className="fw-semibold text-dark">{product.title}</h4>
+              <p className="text-secondary mb-1">{product.description}</p>
+              <p className="text-muted mb-3">{product.details}</p>
               {product.buttons.map((btn, i) => (
                 <Button
                   key={i}
-                  variant="outlined"
-                  sx={{ mr: 1, mt: 1, textTransform: "none" }}
+                  variant="outline-primary"
+                  className="me-2 mt-2 text-capitalize"
                 >
                   {btn}
                 </Button>
               ))}
-            </Box>
-          </Box>
+            </Col>
+          </Row>
         ))}
 
-        {/* Universe Section */}
+        {/* Zerodha Universe Section */}
         <ZerodhaUniverse />
       </Container>
-    </Box>
+    </section>
   );
 }

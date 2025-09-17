@@ -1,19 +1,23 @@
 // src/components/FAQSection.jsx
 import React from "react";
-import { Container, Typography, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
-import { ExpandMore } from "@mui/icons-material";
+import { Container, Accordion } from "react-bootstrap";
 
-// Utility to highlight matching text
+// 🔹 Utility to highlight matching text
 const highlightText = (text, query) => {
   if (!query) return text;
   const regex = new RegExp(`(${query})`, "gi");
   const parts = text.split(regex);
   return parts.map((part, i) =>
-    regex.test(part) ? <span key={i} style={{ backgroundColor: "#fff176" }}>{part}</span> : part
+    regex.test(part) ? (
+      <span key={i} style={{ backgroundColor: "#fff176" }}>{part}</span>
+    ) : (
+      part
+    )
   );
 };
 
 export default function FAQSection({ faqs, searchQuery }) {
+  // Filter FAQs based on search query
   const filteredFaqs = faqs.filter(
     (faq) =>
       faq.q.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -21,36 +25,31 @@ export default function FAQSection({ faqs, searchQuery }) {
   );
 
   return (
-    <Container maxWidth="md" sx={{ py: 6 }}>
-      <Typography variant="h5" fontWeight={600} mb={4} sx={{ color: "#1a237e" }}>
-        Frequently Asked Questions
-      </Typography>
+    <Container className="py-5">
+      {/* Section Header */}
+      <h5 className="fw-bold text-primary mb-4">Frequently Asked Questions</h5>
 
       {filteredFaqs.length > 0 ? (
-        filteredFaqs.map((faq, idx) => (
-          <Accordion
-            key={idx}
-            sx={{
-              mb: 2,
-              borderRadius: 2,
-              "&:before": { display: "none" },
-              boxShadow: 1,
-              transition: "0.3s",
-              "&:hover": { boxShadow: 6 },
-            }}
-          >
-            <AccordionSummary expandIcon={<ExpandMore />} sx={{ fontWeight: 600, color: "#1565c0" }}>
-              {highlightText(faq.q, searchQuery)}
-            </AccordionSummary>
-            <AccordionDetails sx={{ color: "#424242", lineHeight: 1.6 }}>
-              {highlightText(faq.a, searchQuery)}
-            </AccordionDetails>
-          </Accordion>
-        ))
+        <Accordion defaultActiveKey="0" alwaysOpen>
+          {filteredFaqs.map((faq, idx) => (
+            <Accordion.Item
+              key={idx}
+              eventKey={String(idx)}
+              className="mb-3 shadow-sm rounded"
+            >
+              <Accordion.Header className="fw-semibold text-primary">
+                {highlightText(faq.q, searchQuery)}
+              </Accordion.Header>
+              <Accordion.Body className="text-secondary">
+                {highlightText(faq.a, searchQuery)}
+              </Accordion.Body>
+            </Accordion.Item>
+          ))}
+        </Accordion>
       ) : (
-        <Typography variant="body1" sx={{ color: "#424242", mt: 2 }}>
-          No FAQs found for "{searchQuery}"
-        </Typography>
+        <p className="text-muted mt-3">
+          No FAQs found for "<span className="fw-semibold">{searchQuery}</span>"
+        </p>
       )}
     </Container>
   );

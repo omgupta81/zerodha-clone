@@ -1,5 +1,7 @@
+
+// src/components/BrokerageSection.jsx
 import { useState } from "react";
-import { Box, Container, Typography, Tabs, Tab } from "@mui/material";
+import { Container, Tabs, Tab } from "react-bootstrap";
 import { motion, AnimatePresence } from "framer-motion";
 import DataTable from "./DataTable";
 import { brokerageConfig } from "./brokerageConfig";
@@ -8,31 +10,25 @@ export default function BrokerageSection() {
   const [activeTab, setActiveTab] = useState("equity");
 
   return (
-    <Box sx={{ py: 6, bgcolor: "background.default" }}>
-      <Container maxWidth="lg">
-        <Typography
-          variant="h4"
-          gutterBottom
-          align="center"
-          sx={{ fontWeight: "600", mb: 4 }}
-        >
+    <section className="py-5" style={{ backgroundColor: "#f8f9fa" }}>
+      <Container>
+        <h2 className="text-center mb-4 fw-bold" style={{ color: "#1a237e" }}>
           Brokerage & Charges
-        </Typography>
+        </h2>
 
-        {/* Tabs */}
+        {/* Bootstrap Tabs */}
         <Tabs
-          value={activeTab}
-          onChange={(e, val) => setActiveTab(val)}
-          centered
-          sx={{
-            borderBottom: 1,
-            borderColor: "divider",
-            mb: 4,
-            "& .MuiTab-root": { fontWeight: 600, fontSize: "1rem" },
-          }}
+          activeKey={activeTab}
+          onSelect={(k) => setActiveTab(k)}
+          className="mb-4 justify-content-center"
+          fill
         >
           {Object.entries(brokerageConfig).map(([key, { label }]) => (
-            <Tab key={key} label={label} value={key} />
+            <Tab
+              key={key}
+              eventKey={key}
+              title={<span className="fw-semibold">{label}</span>}
+            />
           ))}
         </Tabs>
 
@@ -52,6 +48,6 @@ export default function BrokerageSection() {
           </motion.div>
         </AnimatePresence>
       </Container>
-    </Box>
+    </section>
   );
 }

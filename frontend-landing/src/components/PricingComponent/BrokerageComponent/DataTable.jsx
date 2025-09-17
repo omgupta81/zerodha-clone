@@ -1,65 +1,71 @@
-import { Table, TableHead, TableRow, TableCell, TableBody, Paper, useTheme } from "@mui/material";
+// src/components/DataTable.jsx
+import React from "react";
+import { Table, Card } from "react-bootstrap";
 
-export default function DataTable({ headers, rows }) {
-  const theme = useTheme();
-  const isDark = theme.palette.mode === "dark";
+export default function DataTable({ headers, rows, isDark = false }) {
+  const tableBg = isDark ? "#1e1e1e" : "#fafafa";
+  const headerBg = isDark ? "#2c2c2c" : "#f0f0f0";
+  const rowHoverBg = isDark ? "#2a2a2a" : "#f9f9f9";
+  const textColor = isDark ? "#ddd" : "#000";
 
   return (
-    <Paper
-      sx={{
-        mt: 3,
+    <Card
+      className="mt-3 p-3"
+      style={{
+        borderRadius: "1rem",
+        backgroundColor: tableBg,
         overflowX: "auto",
-        p: 3,
-        borderRadius: 3,
-        boxShadow: 4,
-        bgcolor: isDark ? "#1e1e1e" : "#fafafa",
+        boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
       }}
     >
-      <Table stickyHeader>
-        <TableHead>
-          <TableRow>
+      <Table responsive hover bordered className="mb-0" style={{ marginBottom: 0 }}>
+        <thead style={{ backgroundColor: headerBg, position: "sticky", top: 0, zIndex: 1 }}>
+          <tr>
             {headers.map((h, idx) => (
-              <TableCell
+              <th
                 key={idx}
-                sx={{
+                style={{
                   fontWeight: "bold",
-                  bgcolor: isDark ? "#2c2c2c" : "#f0f0f0",
-                  color: isDark ? "#f5f5f5" : "inherit",
-                  py: 2,
+                  color: isDark ? "#eee8e8ff" : "#000",
+                  padding: "0.75rem 1rem",
                   fontSize: "0.95rem",
                 }}
               >
                 {h}
-              </TableCell>
+              </th>
             ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
+          </tr>
+        </thead>
+        <tbody>
           {rows.map((row, i) => (
-            <TableRow
+            <tr
               key={i}
-              sx={{
-                "&:hover": { bgcolor: isDark ? "#2a2a2a" : "#f9f9f9" },
+              style={{
+                backgroundColor: tableBg,
                 transition: "0.2s ease-in-out",
+                cursor: "default",
               }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = rowHoverBg)}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = tableBg)}
             >
               {row.map((cell, j) => (
-                <TableCell
+                <td
                   key={j}
-                  sx={{
-                    py: 2.5,
+                  style={{
+                    padding: "0.75rem 1rem",
                     fontSize: "0.9rem",
                     lineHeight: 1.6,
-                    color: isDark ? "#ddd" : "inherit",
+                    color: textColor,
                   }}
                 >
                   <span dangerouslySetInnerHTML={{ __html: cell }} />
-                </TableCell>
+                </td>
               ))}
-            </TableRow>
+            </tr>
           ))}
-        </TableBody>
+        </tbody>
       </Table>
-    </Paper>
+    </Card>
   );
 }
+

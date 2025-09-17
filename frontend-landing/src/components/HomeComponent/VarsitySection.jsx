@@ -1,71 +1,39 @@
-import { Box, Container, Typography, Button } from "@mui/material";
+// src/components/VarsitySection.jsx
+import { Container, Row, Col, Button } from "react-bootstrap";
 import VarsityImg from "../../assets/education.svg";
 
 export default function VarsitySection() {
   return (
-    <Box sx={{ py: 10, bgcolor: "white" }}>
-      <Container maxWidth="lg">
-        {/* Flex layout: Image left, Text right */}
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: { xs: "column", md: "row" }, // stack on mobile
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 4,
-          }}
-        >
+    <section className="py-5 bg-white">
+      <Container>
+        <Row className="align-items-center">
           {/* Left - Image */}
-          <Box
-            sx={{
-              flex: "1",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Box
-              component="img"
+          <Col xs={12} md={6} className="d-flex justify-content-center mb-4 mb-md-0">
+            <img
               src={VarsityImg}
               alt="Varsity by Zerodha"
-              sx={{
-                width: { xs: "80%", md: "100%" },
-                maxWidth: 500,
-                height: "auto",
-              }}
+              className="img-fluid"
+              style={{ maxWidth: 500 }}
             />
-          </Box>
+          </Col>
 
-          {/* Right - Text content */}
-          <Box
-            sx={{
-              flex: "0 0 45%",
-              textAlign: { xs: "center", md: "left" },
-            }}
-          >
-            <Typography variant="h4" fontWeight="bold" gutterBottom>
-              Varsity by Zerodha
-            </Typography>
-            <Typography variant="subtitle1" color="text.secondary" mb={4}>
-              An open-access, interactive, and extensive stock market education
-              platform.
-            </Typography>
+          {/* Right - Text */}
+          <Col xs={12} md={6} className="text-center text-md-start">
+            <h2 className="fw-bold mb-3">Varsity by Zerodha</h2>
+            <p className="text-secondary mb-4">
+              An open-access, interactive, and extensive stock market education platform.
+            </p>
             <Button
-              variant="contained"
-              sx={{
-                bgcolor: "#387ed1",
-                textTransform: "none",
-                px: 4,
-                py: 1.5,
-                fontSize: "1rem",
-                "&:hover": { bgcolor: "#245ea6" },
-              }}
+              as="a"
+              href="#"
+              className="px-4 py-2"
+              style={{ backgroundColor: "#387ed1", borderColor: "#387ed1", textTransform: "none" }}
             >
               Explore Varsity
             </Button>
-          </Box>
-        </Box>
+          </Col>
+        </Row>
       </Container>
-    </Box>
+    </section>
   );
 }

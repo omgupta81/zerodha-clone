@@ -1,18 +1,20 @@
 // src/components/FAQItem.jsx
 import React from "react";
-import { Accordion, AccordionSummary, AccordionDetails, Typography } from "@mui/material";
-import { ExpandMore } from "@mui/icons-material";
+import { Accordion } from "react-bootstrap";
 import { highlightText } from "./CategoryCard";
 
-export default function FAQItem({ faq, searchQuery }) {
+export default function FAQItem({ faq, searchQuery, eventKey }) {
   return (
-    <Accordion sx={{ mb: 2, borderRadius: 2, "&:before": { display: "none" }, boxShadow: 1 }}>
-      <AccordionSummary expandIcon={<ExpandMore />} sx={{ fontWeight: 600, color: "#1565c0" }}>
+    <Accordion.Item
+      eventKey={eventKey}
+      className="mb-2 shadow-sm rounded"
+    >
+      <Accordion.Header className="fw-semibold text-primary">
         {highlightText(faq.q, searchQuery)}
-      </AccordionSummary>
-      <AccordionDetails sx={{ color: "#424242", lineHeight: 1.6 }}>
+      </Accordion.Header>
+      <Accordion.Body className="text-secondary">
         {highlightText(faq.a, searchQuery)}
-      </AccordionDetails>
-    </Accordion>
+      </Accordion.Body>
+    </Accordion.Item>
   );
 }

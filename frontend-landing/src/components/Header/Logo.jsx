@@ -1,25 +1,20 @@
 // src/components/Header/Logo.jsx
-import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { Image } from "react-bootstrap";
 
 export default function Logo() {
   return (
     <Link
       to="/"
-      style={{
-        textDecoration: "none",
-        display: "flex",
-        alignItems: "center",
-      }}
+      className="d-flex align-items-center text-decoration-none"
+      style={{ color: "black" }}
     >
-      {/* Replace with <img src={Logo} alt="Logo" /> if you have one */}
-      <Typography
-        variant="h6"
-        component="span"
-        sx={{ color: "black", fontWeight: "bold" }}
-      >
+    
+
+      {/* Logo Text */}
+      <span className="fs-5 fw-bold" style={{ lineHeight: 1 }}>
         Zerodha Clone
-      </Typography>
+      </span>
     </Link>
   );
 }

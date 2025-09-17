@@ -1,60 +1,47 @@
 // src/components/SupportFooter.jsx
 import React from "react";
-import { Box, Container, Grid, Typography, Link } from "@mui/material";
+import { Container, Row, Col, ListGroup } from "react-bootstrap";
 import RaiseTicketButton from "./RaiseTicketButton";
 
 export default function SupportFooter() {
   return (
-    <Box sx={{ backgroundColor: "#f5f5f5", py: 6, borderTop: "1px solid #e0e0e0" }}>
-      <Container maxWidth="lg">
-        <Grid container spacing={4}>
+    <footer className="bg-light py-5 border-top">
+      <Container>
+        <Row>
           {/* Popular Topics */}
-          <Grid item xs={12} sm={6}>
-            <Typography
-              variant="h6"
-              gutterBottom
-              sx={{ fontWeight: 700, color: "#1565c0" }}
-            >
-              Popular Topics
-            </Typography>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-              <li>
-                <Link href="#" sx={{ color: "#424242", textDecoration: "none" }}>
+          <Col xs={12} md={6} className="mb-4 mb-md-0">
+            <h5 className="fw-bold text-primary mb-3">Popular Topics</h5>
+            <ListGroup variant="flush">
+              <ListGroup.Item className="px-0 py-1">
+                <a href="#" className="text-dark text-decoration-none">
                   How to reset my Kite password?
-                </Link>
-              </li>
-              <li>
-                <Link href="#" sx={{ color: "#424242", textDecoration: "none" }}>
+                </a>
+              </ListGroup.Item>
+              <ListGroup.Item className="px-0 py-1">
+                <a href="#" className="text-dark text-decoration-none">
                   Adding funds using UPI
-                </Link>
-              </li>
-              <li>
-                <Link href="#" sx={{ color: "#424242", textDecoration: "none" }}>
-                  Understanding P&L reports
-                </Link>
-              </li>
-            </ul>
-          </Grid>
+                </a>
+              </ListGroup.Item>
+              <ListGroup.Item className="px-0 py-1">
+                <a href="#" className="text-dark text-decoration-none">
+                  Understanding P&amp;L reports
+                </a>
+              </ListGroup.Item>
+            </ListGroup>
+          </Col>
 
           {/* Raise Ticket Section */}
-          <Grid item xs={12} sm={6}>
-            <Typography
-              variant="h6"
-              gutterBottom
-              sx={{ fontWeight: 700, color: "#1565c0" }}
-            >
-              Need More Help?
-            </Typography>
-            <Typography
-              variant="body2"
-              sx={{ mb: 3, color: "#424242", lineHeight: 1.6 }}
-            >
-              If you can't find what you're looking for, raise a support ticket and our team will get back to you promptly.
-            </Typography>
+          <Col xs={12} md={6}>
+            <h5 className="fw-bold text-primary mb-3">Need More Help?</h5>
+            <p className="text-muted mb-3" style={{ lineHeight: 1.6 }}>
+              If you can't find what you're looking for, raise a support ticket
+              and our team will get back to you promptly.
+            </p>
             <RaiseTicketButton />
-          </Grid>
-        </Grid>
+          </Col>
+        </Row>
       </Container>
-    </Box>
+    </footer>
   );
 }
+

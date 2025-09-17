@@ -1,35 +1,46 @@
 // src/components/Header/NavLinks.jsx
-import { Button, Box } from "@mui/material";
+import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import navItems from "./NavItems";
 
 export default function NavLinks() {
   return (
-    <Box>
-      {navItems.map((item) => (
-        <Button
-          key={item.label}
-          component={Link}
-          to={item.path}
-          sx={{ color: "black", mx: 1 }}
-        >
-          {item.label}
-        </Button>
-      ))}
+    <div className="d-flex align-items-center">
+      {/* Navigation Links */}
+      <div className="d-flex gap-3">
+        {navItems.map((item) => (
+          <Button
+            key={item.label}
+            as={Link}
+            to={item.path}
+            variant="link"
+            className="text-dark fw-medium"
+            style={{
+              textDecoration: "none",
+              transition: "color 0.2s ease",
+            }}
+            onMouseEnter={(e) => (e.target.style.color = "#1e88e5")}
+            onMouseLeave={(e) => (e.target.style.color = "#000")}
+          >
+            {item.label}
+          </Button>
+        ))}
+      </div>
+
+      {/* Sign Up Button */}
       <Button
-        variant="contained"
-        component={Link}
+        as={Link}
         to="/signup"
-        sx={{
-          bgcolor: "#387ed1",
-          color: "white",
+        variant="primary"
+        className="ms-3 px-4"
+        style={{
           textTransform: "none",
-          ml: 2,
-          "&:hover": { bgcolor: "#245ea6" },
+          fontWeight: "500",
+          borderRadius: "50px",
         }}
       >
         Sign Up
       </Button>
-    </Box>
+    </div>
   );
 }

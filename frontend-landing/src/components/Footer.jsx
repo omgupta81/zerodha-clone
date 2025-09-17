@@ -1,24 +1,17 @@
-import { Container, Typography, Box } from "@mui/material";
-
 export default function Footer() {
   return (
-    <Box
-      component="footer"
-      sx={{
-        bgcolor: "#f9f9f9", // light grey background
-        py: 4,
-        mt: "auto",
-        borderTop: "1px solid #e0e0e0",
-      }}
+    <footer
+      className="bg-light py-4 mt-auto border-top"
+      style={{ borderColor: "#e0e0e0" }}
     >
-      <Container sx={{ textAlign: "center" }}>
-        <Typography variant="body2" color="text.secondary">
+      <div className="container text-center">
+        <p className="mb-1 text-muted">
           © {new Date().getFullYear()} Zerodha Clone. All rights reserved.
-        </Typography>
-        <Typography variant="caption" color="text.secondary" display="block">
+        </p>
+        <small className="text-muted d-block">
           Built for learning purposes only.
-        </Typography>
-      </Container>
-    </Box>
+        </small>
+      </div>
+    </footer>
   );
 }

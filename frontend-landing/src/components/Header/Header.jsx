@@ -1,45 +1,63 @@
 // src/components/Header/Header.jsx
 import { useState } from "react";
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  useMediaQuery,
-} from "@mui/material";
-import { Menu as MenuIcon } from "@mui/icons-material";
-
+import { Link } from "react-router-dom";
 import Logo from "./Logo";
-import NavLinks from "./NavLinks";
-import MobileMenu from "./MobileMenu";
+import navItems from "./NavItems";
 
 export default function Header() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const isMobile = useMediaQuery("(max-width:900px)");
-
-  const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <>
-      <AppBar
-        position="static"
-        elevation={0}
-        sx={{ bgcolor: "white", borderBottom: "1px solid #e0e0e0" }}
-      >
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+      <div className="container-fluid px-2 px-lg-4 d-flex justify-content-between align-items-center">
+        {/* Logo */}
+        <Link to="/" className="d-flex align-items-center text-decoration-none">
           <Logo />
+        </Link>
 
-          {!isMobile ? (
-            <NavLinks />
-          ) : (
-            <IconButton onClick={handleDrawerToggle}>
-              <MenuIcon sx={{ color: "black" }} />
-            </IconButton>
-          )}
-        </Toolbar>
-      </AppBar>
+        {/* Hamburger toggle */}
+        <button
+          className="navbar-toggler border-0"
+          type="button"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
-      {/* Drawer for mobile */}
-      <MobileMenu open={mobileOpen} onClose={handleDrawerToggle} />
-    </>
+        {/* Navbar links */}
+        <div
+          className={`collapse navbar-collapse justify-content-end ${
+            isOpen ? "show" : ""
+          }`}
+        >
+          <ul className="navbar-nav align-items-center mb-2 mb-lg-0">
+            {navItems.map((item) => (
+              <li className="nav-item" key={item.label}>
+                <Link
+                  className="nav-link text-dark mx-2"
+                  to={item.path}
+                  style={{ fontWeight: 500 }}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+
+            {/* Sign Up button */}
+            <li className="nav-item ms-lg-3">
+              <Link
+                className="btn btn-primary px-3"
+                to="/signup"
+                onClick={() => setIsOpen(false)}
+              >
+                Sign Up
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   );
 }
+

@@ -1,4 +1,6 @@
-import { Box, Container, Typography } from "@mui/material";
+// src/components/ZerodhaUniverse.jsx
+import React from "react";
+import { Container, Row, Col, Card } from "react-bootstrap";
 
 // Partner logos
 import Tijori from "../assets/tijori.svg";
@@ -19,8 +21,7 @@ export default function ZerodhaUniverse() {
     {
       img: Ditto,
       alt: "Ditto",
-      details:
-        "Personalized advice on life and health insurance. No spam or mis-selling.",
+      details: "Personalized advice on life and health insurance. No spam or mis-selling.",
     },
     {
       img: ZerodhaFundhouse,
@@ -37,8 +38,7 @@ export default function ZerodhaUniverse() {
     {
       img: Smallcase,
       alt: "Smallcase",
-      details:
-        "Thematic investing platform with diversified stock baskets and ETFs.",
+      details: "Thematic investing platform with diversified stock baskets and ETFs.",
     },
     {
       img: Sensibull,
@@ -49,77 +49,48 @@ export default function ZerodhaUniverse() {
   ];
 
   return (
-    <Box sx={{ py: { xs: 8, md: 12 } }}>
-      <Container maxWidth="lg">
+    <section className="py-5 bg-light">
+      <Container>
         {/* Heading */}
-        <Typography
-          variant="h5"
-          fontWeight={700}
-          textAlign="center"
-          gutterBottom
-          sx={{ color: "#2c2c2c" }}
-        >
-          The Zerodha Universe
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          color="text.secondary"
-          textAlign="center"
-          mb={6}
-          sx={{ color: "#2c2c2c" }}
-        >
-          Extend your trading and investment experience with our trusted
-          partners. Each platform complements your journey with specialized
-          services.
-        </Typography>
+        <h3 className="fw-bold text-center mb-3">The Zerodha Universe</h3>
+        <p className="text-muted text-center mb-5">
+          Extend your trading and investment experience with our trusted partners.
+          Each platform complements your journey with specialized services.
+        </p>
 
         {/* Partner Grid */}
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: {
-              xs: "1fr",
-              sm: "1fr 1fr",
-              md: "1fr 1fr 1fr",
-            },
-            gap: 6,
-          }}
-        >
+        <Row className="g-4 justify-content-center">
           {partners.map((partner, idx) => (
-            <Box
-              key={idx}
-              textAlign="center"
-              sx={{
-                p: 3,
-                bgcolor: "#fff",
-                borderRadius: 2,
-                boxShadow: 2,
-                transition: "all 0.3s ease",
-                "&:hover": { boxShadow: 5, transform: "translateY(-4px)" },
-              }}
-            >
-              <Box
-                component="img"
-                src={partner.img}
-                alt={partner.alt}
-                sx={{
-                  width: "120px",
-                  height: "auto",
-                  objectFit: "contain",
-                  mb: 2,
+            <Col key={idx} xs={12} sm={6} md={4}>
+              <Card
+                className="text-center h-100 shadow-sm p-4 bg-white"
+                style={{
+                  borderRadius: "1rem",
+                  transition: "all 0.3s ease",
+                  cursor: "pointer",
                 }}
-              />
-              <Typography
-                variant="body2"
-                color="#555"
-                sx={{ lineHeight: 1.6 }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = "0px 8px 20px rgba(0,0,0,0.15)";
+                  e.currentTarget.style.transform = "translateY(-4px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = "0px 4px 12px rgba(0,0,0,0.1)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
               >
-                {partner.details}
-              </Typography>
-            </Box>
+                <Card.Img
+                  variant="top"
+                  src={partner.img}
+                  alt={partner.alt}
+                  className="mb-3"
+                  style={{ maxWidth: "120px", height: "auto", margin: "0 auto" }}
+                />
+                <Card.Text className="text-muted small">{partner.details}</Card.Text>
+              </Card>
+            </Col>
           ))}
-        </Box>
+        </Row>
       </Container>
-    </Box>
+    </section>
   );
 }

@@ -1,6 +1,6 @@
 // src/components/CategoryCard.jsx
 import React from "react";
-import { Paper, Box, Typography, Button } from "@mui/material";
+import { Card, Button } from "react-bootstrap";
 
 // 🔹 Utility to highlight matching text
 export const highlightText = (text, query) => {
@@ -18,51 +18,50 @@ export const highlightText = (text, query) => {
 
 export default function CategoryCard({ cat, searchQuery }) {
   return (
-    <Paper
-      elevation={3}
-      sx={{
-        p: 4,
-        borderRadius: 3,
+    <Card
+      className="p-4 mb-3 shadow-sm text-center"
+      style={{
+        borderRadius: "1rem",
         border: "1px solid #e0e0e0",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "flex-start",
-        width: 280,
+        width: "100%",
+        maxWidth: 280,
         transition: "0.3s",
-        "&:hover": {
-          boxShadow: 8,
-          borderColor: "#90caf9",
-          transform: "translateY(-5px)",
-        },
+        cursor: "pointer",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.boxShadow = "0 0.5rem 1rem rgba(0,0,0,0.15)";
+        e.currentTarget.style.borderColor = "#90caf9";
+        e.currentTarget.style.transform = "translateY(-5px)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.boxShadow = "0 .125rem .25rem rgba(0,0,0,.075)";
+        e.currentTarget.style.borderColor = "#e0e0e0";
+        e.currentTarget.style.transform = "translateY(0)";
       }}
     >
-      <Box mb={2}>{cat.icon}</Box>
-      <Typography
-        variant="h6"
-        gutterBottom
-        sx={{ color: "#1565c0", fontWeight: 700, fontSize: "1.2rem" }}
-      >
+      {/* Icon */}
+      {cat.icon && <div className="mb-3 fs-2">{cat.icon}</div>}
+
+      {/* Title */}
+      <Card.Title className="fw-bold text-primary mb-2" style={{ fontSize: "1.2rem" }}>
         {highlightText(cat.title, searchQuery)}
-      </Typography>
-      <Typography
-        variant="body2"
-        sx={{ color: "#424242", mb: 2, lineHeight: 1.6, wordWrap: "break-word" }}
-      >
+      </Card.Title>
+
+      {/* Description */}
+      <Card.Text className="text-secondary mb-3" style={{ lineHeight: 1.6, wordBreak: "break-word" }}>
         {highlightText(cat.desc, searchQuery)}
-      </Typography>
+      </Card.Text>
+
+      {/* Explore Button */}
       <Button
-        size="small"
-        variant="text"
-        sx={{
-          px: 0,
-          color: "#1565c0",
-          fontWeight: 600,
-          textTransform: "none",
-          "&:hover": { textDecoration: "underline" },
-        }}
+        variant="link"
+        className="fw-semibold text-primary p-0"
+        style={{ textDecoration: "none" }}
+        onMouseOver={(e) => (e.currentTarget.style.textDecoration = "underline")}
+        onMouseOut={(e) => (e.currentTarget.style.textDecoration = "none")}
       >
         Explore →
       </Button>
-    </Paper>
+    </Card>
   );
 }
